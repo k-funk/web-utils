@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { DateTime } from 'luxon'
 import { CSVLink } from 'react-csv'
 import cheerio from 'cheerio'
@@ -12,9 +12,8 @@ import styles from '../styles/Home.module.css'
 
 
 const Home: NextPage = () => {
-  const [csvOutput, setCsvOutput] = useState<string[][]>([])
+  const [csvData, setCsvData] = useState<{ [key: string ]: string }[]>([])
   const [filename, setFilename] = useState('')
-  const csvLink = useRef<CSVLink & HTMLAnchorElement & { link: HTMLAnchorElement }>(null)
 
   function preprocessHtml(fileStr: string) {
     const tableId = 'data-table'
@@ -44,13 +43,7 @@ const Home: NextPage = () => {
     if (jsonTables.count !== 1) {
       throw new Error('table format changed. Second row was not "Saldo Inicial"')
     }
-    const modifiedResult = jsonTables.results[0].map((rowObj: { [key: string]: string }) => {
-      return {
-        ...rowObj,
-        Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
-      }
-    })
-    setCsvOutput(modifiedResult)
+    setCsvData(jsonTables.results[0])
 
     /** Tabletojson Implementation */
     // const tableJson = Tabletojson.convert(innerTable.toString())[0]
@@ -82,6 +75,26 @@ const Home: NextPage = () => {
     reader.readAsText(file)
   }
 
+  const csvDataUSDates = useMemo(() => {
+    return csvData.map((rowObj: { [key: string]: string }) => {
+      return {
+        ...rowObj,
+        Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
+      }
+    })
+  }, [csvData])
+
+  const csvDataGeneralLedger = useMemo(() => {
+    return csvData.map((rowObj: { [key: string]: string }) => {
+      return {
+        ...rowObj,
+        Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
+        Credito: Math.sign(Number(rowObj.Monto)) === 1 ? rowObj.Monto : '',
+        Debito: Math.sign(Number(rowObj.Monto)) === -1 ? Math.abs(Number(rowObj.Monto)) : '',
+      }
+    })
+  }, [csvData])
+
   return (
     <div className={styles.container}>
       <Head>
@@ -106,16 +119,40 @@ const Home: NextPage = () => {
             acceptType=".xls"
             filename={filename}
           />
-          {csvOutput.length > 0 && (
-            <CSVLink
-              data={csvOutput}
-              className={styles.csvLink}
-              filename="output.csv"
-              ref={csvLink}
-              target="_blank"
-            >
-              Download output.csv
-            </CSVLink>
+          {csvData.length > 0 && (
+            <div>
+              <CSVLink
+                data={csvData}
+                className={styles.csvLink}
+                filename="output.csv"
+                target="_blank"
+              >
+                Download - No Modifications
+              </CSVLink>
+              <CSVLink
+                data={csvDataUSDates}
+                className={styles.csvLink}
+                filename="output.csv"
+                target="_blank"
+              >
+                Download - mm/dd/yyyy
+              </CSVLink>
+              <CSVLink
+                data={csvDataGeneralLedger}
+                headers={[
+                  { label: 'Date', key: 'Fecha'},
+                  { label: 'Document', key: 'Documento'},
+                  { label: 'Description', key: 'Descripción'},
+                  { label: 'Debit', key: 'Debito'},
+                  { label: 'Credit', key: 'Credito'},
+                ]}
+                className={styles.csvLink}
+                filename="output.csv"
+                target="_blank"
+              >
+                Download - General Ledger
+              </CSVLink>
+            </div>
           )}
         </div>
       </main>
