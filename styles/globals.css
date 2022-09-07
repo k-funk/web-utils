@@ -24,3 +24,8 @@ a {
     background: black;
   }
 }
+
+.hidden {
+  display: none;
+}
+
