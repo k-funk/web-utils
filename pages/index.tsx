@@ -111,7 +111,6 @@ const Home: NextPage = () => {
         <p className={styles.description}>
           Promerica CR outputs a so-called {".xls"} format for bank statements. Turns out these morons just output an html file and changed the filename to {'".xls"'}. This tool parses that html and turns the main table into a csv file. Unfortunately, because of the nature of html/css, this tool will likely break when Promerica makes any changes to their site, since it functions like a scraper with html selectors.
         </p>
-        <p>Additionally, this converts the date format from <code>d/m/yyyy</code> to <code>mm/dd/yyyy</code>.</p>
 
         <div>
           <DragAndDrop
