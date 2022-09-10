@@ -53,7 +53,12 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
       <label className={`${styles.labelFileUpload} ${dragActive ? "dragActive" : ""}`} htmlFor="inputFileUpload">
         <div>
           <p>Drag and drop the {acceptType} file here, or click to browse.</p>
-          {filename && <p><code>{filename}</code></p>}
+          {filename && (
+            <>
+              <div className="text-uppercase text-muted"><small>filename</small></div>
+              <p><code>{filename}</code></p>
+            </>
+          )}
         </div>
       </label>
       {dragActive && <div className={styles.dragFileElement} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}

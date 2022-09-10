@@ -109,51 +109,49 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Promerica CR outputs a so-called {".xls"} format for bank statements. Turns out these morons just output an html file and changed the filename to {'".xls"'}. This tool parses that html and turns the main table into a csv file. Unfortunately, because of the nature of html/css, this tool will likely break when Promerica makes any changes to their site, since it functions like a scraper with html selectors.
+          Promerica CR outputs a so-called {'".xls"'} format for bank statements. Turns out these morons just output an html file and changed the filename to {'".xls"'}. This tool parses that html and turns the main table into a csv file. Unfortunately, because of the nature of html, this tool will likely break when Promerica makes any changes to their site, since it functions like a scraper (using html selectors).
         </p>
 
-        <div>
-          <DragAndDrop
-            onChangeFiles={handleChangeFiles}
-            acceptType=".xls"
-            filename={filename}
-          />
-          {csvData.length > 0 && (
-            <div>
-              <CSVLink
-                data={csvData}
-                className={styles.csvLink}
-                filename="output.csv"
-                target="_blank"
-              >
-                Download - No Modifications
-              </CSVLink>
-              <CSVLink
-                data={csvDataUSDates}
-                className={styles.csvLink}
-                filename="output.csv"
-                target="_blank"
-              >
-                Download - mm/dd/yyyy
-              </CSVLink>
-              <CSVLink
-                data={csvDataGeneralLedger}
-                headers={[
-                  { label: 'Date', key: 'Fecha'},
-                  { label: 'Document', key: 'Documento'},
-                  { label: 'Description', key: 'Descripción'},
-                  { label: 'Debit', key: 'Debito'},
-                  { label: 'Credit', key: 'Credito'},
-                ]}
-                className={styles.csvLink}
-                filename="output.csv"
-                target="_blank"
-              >
-                Download - General Ledger
-              </CSVLink>
-            </div>
-          )}
-        </div>
+        <DragAndDrop
+          onChangeFiles={handleChangeFiles}
+          acceptType=".xls"
+          filename={filename}
+        />
+        {csvData.length > 0 && (
+          <div>
+            <CSVLink
+              data={csvData}
+              className={styles.csvLink}
+              filename="output.csv"
+              target="_blank"
+            >
+              Download - No Modifications
+            </CSVLink>
+            <CSVLink
+              data={csvDataUSDates}
+              className={styles.csvLink}
+              filename="output.csv"
+              target="_blank"
+            >
+              Download - mm/dd/yyyy
+            </CSVLink>
+            <CSVLink
+              data={csvDataGeneralLedger}
+              headers={[
+                { label: 'Date', key: 'Fecha'},
+                { label: 'Document', key: 'Documento'},
+                { label: 'Description', key: 'Descripción'},
+                { label: 'Debit', key: 'Debito'},
+                { label: 'Credit', key: 'Credito'},
+              ]}
+              className={styles.csvLink}
+              filename="output.csv"
+              target="_blank"
+            >
+              Download - General Ledger
+            </CSVLink>
+          </div>
+        )}
       </main>
     </div>
   )
