@@ -147,19 +147,21 @@ const Home: NextPage = () => {
         {csvData.length > 0 && (
           <div className={styles.twoColumn}>
             <div>
-              <label className={styles.checkbox}>
+              <label className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
                   checked={modifications.includes(Modifications.dateFormat)}
                   onChange={e => setModifications(xor(modifications, [Modifications.dateFormat]))}
+                  className={styles.checkboxMargin}
                 />
                 <span>d/M/yyyy <span className="text-muted">-&gt;</span> MM/dd/yyyy</span>
               </label>
-              <label className={styles.checkbox}>
+              <label className={styles.checkboxLabel}>
                 <input
                   type="checkbox"
                   checked={modifications.includes(Modifications.splitMonto)}
                   onChange={e => setModifications(xor(modifications, [Modifications.splitMonto]))}
+                  className={styles.checkboxMargin}
                 />
                 <span>{'Split "Monto"'} <span className="text-muted">-&gt;</span> {'"Credit" and "Debit"'}</span>
               </label>

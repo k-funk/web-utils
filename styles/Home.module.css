@@ -12,9 +12,13 @@
   align-items: center;
 }
 
-.checkbox {
+.checkboxLabel {
   display: block;
   margin-bottom: 3px;
+}
+
+.checkboxMargin {
+  margin-right: 10px;
 }
 
 .csvLink {
