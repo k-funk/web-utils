@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { xor } from 'lodash'
 import { DateTime } from 'luxon'
 import { CSVLink } from 'react-csv'
 import cheerio from 'cheerio'
@@ -9,11 +10,27 @@ const HtmlTableToJson = require('html-table-to-json')
 
 import DragAndDrop from '../components/DragAndDrop'
 import styles from '../styles/Home.module.css'
+import { isTruthy } from '../utils/ts'
 
+
+enum Modifications {
+  dateFormat = 'dateFormat',
+  splitMonto = 'splitMonto',
+}
+
+const CommonCsvHeaders = [
+  { label: 'Date', key: 'Fecha' },
+  { label: 'Document', key: 'Documento' },
+  { label: 'Description', key: 'Descripción' },
+]
 
 const Home: NextPage = () => {
   const [csvData, setCsvData] = useState<{ [key: string ]: string }[]>([])
   const [filename, setFilename] = useState('')
+  const [modifications, setModifications] = useState<Modifications[]>([
+    Modifications.dateFormat,
+    Modifications.splitMonto,
+  ])
 
   function preprocessHtml(fileStr: string) {
     const tableId = 'data-table'
@@ -75,25 +92,33 @@ const Home: NextPage = () => {
     reader.readAsText(file)
   }
 
-  const csvDataUSDates = useMemo(() => {
-    return csvData.map((rowObj: { [key: string]: string }) => {
-      return {
-        ...rowObj,
-        Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
-      }
-    })
-  }, [csvData])
+  const csvDataOutput = useMemo(() => {
+    let csvDataOutput: { [key: string ]: string }[] = csvData
 
-  const csvDataGeneralLedger = useMemo(() => {
-    return csvData.map((rowObj: { [key: string]: string }) => {
-      return {
-        ...rowObj,
-        Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
-        Credito: Math.sign(Number(rowObj.Monto)) === 1 ? rowObj.Monto : '',
-        Debito: Math.sign(Number(rowObj.Monto)) === -1 ? Math.abs(Number(rowObj.Monto)) : '',
-      }
-    })
-  }, [csvData])
+    if (modifications.includes(Modifications.dateFormat)) {
+      csvDataOutput = csvDataOutput.map((rowObj: { [key: string]: string }) => ({
+          ...rowObj,
+          Fecha: DateTime.fromFormat(rowObj.Fecha, 'd/M/yyyy').toFormat('MM/dd/yyyy'),
+        }))
+    }
+
+    if (modifications.includes(Modifications.splitMonto)) {
+      csvDataOutput = csvDataOutput.map((rowObj: { [key: string]: string }) => ({
+          ...rowObj,
+          Credito: Math.sign(Number(rowObj.Monto)) === 1 ? `${rowObj.Monto}` : '',
+          Debito: Math.sign(Number(rowObj.Monto)) === -1 ? `${Math.abs(Number(rowObj.Monto))}` : '',
+        }))
+    }
+
+    return csvDataOutput
+  }, [csvData,  modifications])
+
+  const csvHeaders = [
+    ...CommonCsvHeaders,
+    modifications.includes(Modifications.splitMonto) ? undefined : { label: 'Amount', key: 'Monto' },
+    modifications.includes(Modifications.splitMonto) ? { label: 'Debit', key: 'Debito' } : undefined,
+    modifications.includes(Modifications.splitMonto) ? { label: 'Credit', key: 'Credito' } : undefined,
+  ].filter(isTruthy)
 
   const outputFilename = `promerica-converted-xls-${DateTime.now().toFormat('MM-dd-yyyy')}`
 
@@ -120,38 +145,36 @@ const Home: NextPage = () => {
           filename={filename}
         />
         {csvData.length > 0 && (
-          <div>
-            <CSVLink
-              data={csvData}
-              className={styles.csvLink}
-              filename={outputFilename}
-              target="_blank"
-            >
-              Download - No Modifications
-            </CSVLink>
-            <CSVLink
-              data={csvDataUSDates}
-              className={styles.csvLink}
-              filename={outputFilename}
-              target="_blank"
-            >
-              Download - mm/dd/yyyy
-            </CSVLink>
-            <CSVLink
-              data={csvDataGeneralLedger}
-              headers={[
-                { label: 'Date', key: 'Fecha'},
-                { label: 'Document', key: 'Documento'},
-                { label: 'Description', key: 'Descripción'},
-                { label: 'Debit', key: 'Debito'},
-                { label: 'Credit', key: 'Credito'},
-              ]}
-              className={styles.csvLink}
-              filename={outputFilename}
-              target="_blank"
-            >
-              Download - General Ledger
-            </CSVLink>
+          <div className={styles.twoColumn}>
+            <div>
+              <label className={styles.checkbox}>
+                <input
+                  type="checkbox"
+                  checked={modifications.includes(Modifications.dateFormat)}
+                  onChange={e => setModifications(xor(modifications, [Modifications.dateFormat]))}
+                />
+                <span>d/M/yyyy <span className="text-muted">-&gt;</span> MM/dd/yyyy</span>
+              </label>
+              <label className={styles.checkbox}>
+                <input
+                  type="checkbox"
+                  checked={modifications.includes(Modifications.splitMonto)}
+                  onChange={e => setModifications(xor(modifications, [Modifications.splitMonto]))}
+                />
+                <span>{'Split "Monto"'} <span className="text-muted">-&gt;</span> {'"Credit" and "Debit"'}</span>
+              </label>
+            </div>
+            <div>
+              <CSVLink
+                data={csvDataOutput}
+                headers={csvHeaders}
+                className={styles.csvLink}
+                filename={outputFilename}
+                target="_blank"
+              >
+                Download .csv
+              </CSVLink>
+            </div>
           </div>
         )}
       </main>

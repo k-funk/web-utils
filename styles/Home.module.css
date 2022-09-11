@@ -12,20 +12,33 @@
   align-items: center;
 }
 
+.checkbox {
+  display: block;
+  margin-bottom: 3px;
+}
+
 .csvLink {
   display: block;
   width: 100%;
   text-align: center;
+  font-size: 1.3rem;
   font-weight: 500;
   color: white;
   background-color: #6495EDFF;
   border-radius: 10px;
-  padding: 10px 30px;
-  margin-top: 10px;
+  padding: .75rem 3rem;
   text-decoration: none;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, .25);
+  text-transform: uppercase;
 }
 
 .csvLink:hover {
   background-color: #5b87d9;
+}
+
+.twoColumn {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
