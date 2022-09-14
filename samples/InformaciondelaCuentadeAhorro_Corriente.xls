@@ -1,0 +1,315 @@
+<html><style>body {  font-size: 12;  text-align:center;  margin:0 auto; }  #contenedor{width:85%; margin-bottom:100px; text-align:center;}  table { font-size: 12;} table tr { line-height:15px; } table tr td { padding-left:5px; padding-right:0; }  #table2 { margin-left:1px; border-collapse: collapse; border-spacing: 0; }  table .header{ background-color:#00703C; color:#FFFFFF; } table .subHeader { background-color:#C9E7A8; color:#424242; }  #rowSep { height:15px; } .tdNumber { text-align:right; padding-right:5px; }  .tdMarcadoLF { text-align:left; background-color:#C9E7A8;font-weight:bold; }  .tdMarcadoRG { text-align:right; background-color:#C9E7A8; font-weight:bold; }  .line { background-color:#C9E7A8; } h1 { color:#00703C; text-align:center; font-weight: 300; font-size:250%; padding-top:20px;}  .subTitle { font-size:18px; font-weight:bold; } .labelNumber {display:inline-block; width: 100px; text-align:right; }  #lblencabezado { font-weight:bold;} .imagen { float:left; height:100px; }  .imagen img { background-color:#FFFFFF; width:150px; } .description { font-size:9px; } .col1 { width: 200px; } .col2 { width: 250px;mso-number-format:"\@";}
+</style><body><div id="contenedor" ><div style="width:100%; text-align:center; " ><div class="imagen"> <img src="E:\Galileo\PCRC\Systems\InternetBanking\Produccion\Runtime\Builds\Galileo.PersonalBanking.UI.Web\App_Themes\Regional_Default\images\Logo.jpg" style="background-color:#FFFFFF;"/></div><div> <label class="subTitle">BROMERICA DE COSTA RICA SOCIEDAD ANONIMA.</label> <br/> <label class="subTitle">C&eacutedula Jur&iacutedica: 3-101-999999</label> <br/> <label class="subTitle">Estado de Cuenta Mensual al 31/8/2002</label> <br/> <br/></div></div><div style="width:115%; "><div style="width:100%;"><table style="width:85%;"><tr> <td class="col1"> <label id="lblencabezado">Direcci&#243;n del Cliente</label> </td> <td class="col2"> <label class="multilinea">Sample Address. Sample City Sample zip</label></div> <td class="col1"></td> <td class="col2"></td></tr><tr> <td class="col1"> <label id="lblencabezado"> Cuenta IBAN:</label></td> <td class="col2"> <label>Sample IBAN</label></td> <td class="col1"></td> <td class="col2"></td></tr><tr> <td class="col1"> <label id="lblencabezado"> N&#250;mero de cuenta:</label></td> <td class="col2"> <label>Sample account number</label></td> <td class="col1">
+<label id="lblencabezado">Disponible al 31/8/2002:</label></td> <td class="col2"> <label>99,999.99</label></td></tr><tr> <td class="col1"> <label id="lblencabezado">Cliente:</label></td> <td class="col2"> <label>SAMPLE ACCOUNT NAME</label></td> <td class="col1"></td> <td class="col2"></td></tr><tr> <td class="col1"> <label id="lblencabezado">Producto:</label></td> <td class="col2"> <label>CUENTA DE AHORROS EMPRESARIAL  DOLARES</label></td> <td class="col1"></td> <td class="col2"></td></tr><tr> <td class="col1"> <label id="lblencabezado">Tarjeta de D&#233;bito relacionada a cuenta (En caso de haberla):</label></td> <td class="col2"> <label></label></td> <td class="col1"> <label id="lblencabezado">Moneda</label></td> <td class="col2"> <label>DOLARES ESTADOUNIDENSES</label></div></tr></table></div></div><div style="width:100%; padding-top:10px;"><table style="width:115%; padding-top:10px;"><tr> <td> <table border="0">
+	<tr>
+		<td align="left">Fecha</td>
+		<td align="left">Documento</td>
+		<td align="left">Concepto</td>
+		<td align="left">Lugar</td>
+		<td align="left">Descripci&#243;n</td>
+		<td align="right">Monto</td>
+		<td align="right">Saldo</td>
+	</tr>
+	<tr>
+		<td align="left">Saldo Inicial</td>
+		<td align="left"></td>
+		<td align="left"></td>
+		<td align="left"></td>
+		<td align="left"></td>
+		<td align="right"></td>
+		<td align="right">11,038.78</td>
+	</tr>
+	<tr>
+		<td align="left">2/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO MUNI AGUIRRE PAGO TOTAL IB CM</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF ELEC PAGO MUNIC AGUIRRE# 00000000000</td>
+		<td align="right">-786.53</td>
+		<td align="right">10,252.25</td>
+	</tr>
+	<tr>
+		<td align="left">2/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO TRANSF INTERNET CAMBIO MONEDA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Gardening fee - Jul</td>
+		<td align="right">-100.00</td>
+		<td align="right">10,152.25</td>
+	</tr>
+	<tr>
+		<td align="left">2/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO POR TRANSFERENCIA INTERNET</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC MARP Admin fee - Jul</td>
+		<td align="right">-282.50</td>
+		<td align="right">9,869.75</td>
+	</tr>
+	<tr>
+		<td align="left">2/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO POR TRANSFERENCIA INTERNET</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Commissions - July</td>
+		<td align="right">-1,344.67</td>
+		<td align="right">8,525.08</td>
+	</tr>
+	<tr>
+		<td align="left">2/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO POR TRANSFERENCIA INTERNET</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC 26 hrs maint Jul</td>
+		<td align="right">-205.66</td>
+		<td align="right">8,319.42</td>
+	</tr>
+	<tr>
+		<td align="left">3/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO TRANSF INTERNET CAMBIO MONEDA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Vetcomer - Jul</td>
+		<td align="right">-11.44</td>
+		<td align="right">8,307.98</td>
+	</tr>
+	<tr>
+		<td align="left">4/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO COMISION TRANSFERENCIA IB</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Comisi&#243;n. Debito por Transf. Simple</td>
+		<td align="right">-0.75</td>
+		<td align="right">8,307.23</td>
+	</tr>
+	<tr>
+		<td align="left">4/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO DIRECTO</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">DD: INSTITUTO NACIONAL DE SEGUROS , TRAN</td>
+		<td align="right">-1,497.87</td>
+		<td align="right">6,809.36</td>
+	</tr>
+	<tr>
+		<td align="left">8/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO POR TRANSFERENCIA INTERNET</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Airbnb taxes</td>
+		<td align="right">324.67</td>
+		<td align="right">7,134.03</td>
+	</tr>
+	<tr>
+		<td align="left">9/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO CCSS CUOTAS OBRERO PATRONAL IB CM</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF ELEC PAGO CCSS# 9999999999999</td>
+		<td align="right">-164.98</td>
+		<td align="right">6,969.05</td>
+	</tr>
+	<tr>
+		<td align="left">9/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO POR TRANSF. ELECTRONICA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">RIO MANAOS SA: Pago de reserva 999</td>
+		<td align="right">5,000.00</td>
+		<td align="right">11,969.05</td>
+	</tr>
+	<tr>
+		<td align="left">10/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO TRANS. RECIBIDA EXTERIOR</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">WT:ESTADOS UNIDOS/VRBO HOLDINGS, INC</td>
+		<td align="right">1,054.34</td>
+		<td align="right">13,023.39</td>
+	</tr>
+	<tr>
+		<td align="left">10/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CARGO TRANSF.RECIBIDA EXTERIOR</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">WT:ESTADOS UNIDOS/VRBO HOLDINGS, INC</td>
+		<td align="right">-22.00</td>
+		<td align="right">13,001.39</td>
+	</tr>
+	<tr>
+		<td align="left">10/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO POR TRANSF. ELECTRONICA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">RIO MANAOS SA: pago final de reser</td>
+		<td align="right">2,500.00</td>
+		<td align="right">15,501.39</td>
+	</tr>
+	<tr>
+		<td align="left">11/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO TRANSF INTERNET CAMBIO MONEDA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Servicio de control cocina y s</td>
+		<td align="right">-22.69</td>
+		<td align="right">15,478.70</td>
+	</tr>
+	<tr>
+		<td align="left">16/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEB. P. ICE ELEC CALEND.(CAMBIO MONEDA.)</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Pago ICELEC #999999999</td>
+		<td align="right">-511.30</td>
+		<td align="right">14,967.40</td>
+	</tr>
+	<tr>
+		<td align="left">16/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEB. PAGO AYA CALEND. (CAMBIO MONEDA)</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Pago AYA #9999999</td>
+		<td align="right">-46.87</td>
+		<td align="right">14,920.53</td>
+	</tr>
+	<tr>
+		<td align="left">16/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEB. P. ICE TELEFONO CALEND (CAM MONEDA)</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Pago ICE #9999999</td>
+		<td align="right">-82.15</td>
+		<td align="right">14,838.38</td>
+	</tr>
+	<tr>
+		<td align="left">22/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CARGO COMISION COMPRA EXTERIOR CTA $</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">CARGO COMISION COMPRA EXTERIOR CTA $&lt;525</td>
+		<td align="right">-4.99</td>
+		<td align="right">14,833.39</td>
+	</tr>
+	<tr>
+		<td align="left">22/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO TRANSF INTERNET CAMBIO MONEDA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC 2 gas tanks</td>
+		<td align="right">-34.48</td>
+		<td align="right">14,798.91</td>
+	</tr>
+	<tr>
+		<td align="left">22/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">COMPRA COMERCIO EXTERIOR VISA</td>
+		<td align="left">BROMERICA-840</td>
+		<td align="left">HOMEAWAY US              877-202-4291 US</td>
+		<td align="right">-499.00</td>
+		<td align="right">14,299.91</td>
+	</tr>
+	<tr>
+		<td align="left">26/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO COMISION TRANSFERENCIA IB</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Comisi&#243;n. Debito por Transf. Simple</td>
+		<td align="right">-0.75</td>
+		<td align="right">14,299.16</td>
+	</tr>
+	<tr>
+		<td align="left">26/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO DIRECTO</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">DD: OTHER</td>
+		<td align="right">-300.00</td>
+		<td align="right">13,999.16</td>
+	</tr>
+	<tr>
+		<td align="left">31/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO TRANSF INTERNET CAMBIO MONEDA</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Jasmin - Aug salary</td>
+		<td align="right">-486.92</td>
+		<td align="right">13,512.24</td>
+	</tr>
+	<tr>
+		<td align="left">31/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO COMISION TRANSFERENCIA IB</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">Comisi&#243;n. Debito por Transf. Simple</td>
+		<td align="right">-0.75</td>
+		<td align="right">13,511.49</td>
+	</tr>
+	<tr>
+		<td align="left">31/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">CREDITO DIRECTO</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">DD: INSTITUTO NACIONAL DE SEGUROS , TRAN</td>
+		<td align="right">-153.15</td>
+		<td align="right">13,358.34</td>
+	</tr>
+	<tr>
+		<td align="left">31/8/2002</td>
+		<td align="left"></td>
+		<td align="left">CAPITALIZACION NORMAL DE INTERESES</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">CAPITALIZACION NORMAL DE INTERESES</td>
+		<td align="right">0.57</td>
+		<td align="right">13,358.91</td>
+	</tr>
+	<tr>
+		<td align="left">31/8/2002</td>
+		<td align="left">9999999</td>
+		<td align="left">DEBITO POR TRANSFERENCIA INTERNET</td>
+		<td align="left">BROMERICA-CR</td>
+		<td align="left">TEF. ELEC Pool fee</td>
+		<td align="right">-197.75</td>
+		<td align="right">13,161.16</td>
+	</tr>
+</table>
+ <td><tr></table> <br/><table><tr> <td class="header" style="width:300px; text-align:center;"> Saldos al Corte</td>
+<td class="header" style="width:280px; text-align:center; "> Tasa de Inter&#233;s Pasiva Anual</td></tr><tr> <td><table><tr> <td class="FormTDSubTitle left" style="width: 170px; text-align:left;"> Saldo anterior</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr><tr> <td style="width: 170px; text-align:left;"> Total Cr&#233;ditos</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr><tr> <td style="width: 170px; text-align:left;"> Total D&#233;bitos y Cargos</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr><tr> <td style="width: 170px; text-align:left;"> Saldo Parcial Actual</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr><tr> <td style="width: 170px; text-align:left;"> Saldo en flote</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 0.00</td></tr><tr>
+<td style="width: 170px; text-align:left;"> Saldo consultado y congelado</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 0.00</td></tr><tr> <td style="width: 170px; text-align:left;"> Saldo promedio del mes</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr><tr> <td style="width: 170px; text-align:left;"> Disponible</td> <td class="FormTDText right" style="width: 100px; text-align:right;"> 99,999.99</td></tr></table></td> <td><table border="0">
+	<tr>
+		<td>L&#237;mite Inferior</td>
+		<td>L&#237;mite Superior</td>
+		<td>Tasa</td>
+	</tr>
+	<tr>
+		<td align="right">0</td>
+		<td align="right">2500</td>
+		<td align="right">0.02</td>
+	</tr>
+	<tr>
+		<td align="right">2500.01</td>
+		<td align="right">15000</td>
+		<td align="right">0.05</td>
+	</tr>
+	<tr>
+		<td align="right">15000.01</td>
+		<td align="right">50000</td>
+		<td align="right">0.06</td>
+	</tr>
+	<tr>
+		<td align="right">50000.01</td>
+		<td align="right">9999999999</td>
+		<td align="right">0.08</td>
+	</tr>
+</table>
+</td></tr></table> <br/><table><tr> <td style="text-align:center; font-size:16px; color:Black; font-family:Arial; font-weight:bold; text-decoration:underline;">Mensajes Importantes</td></tr><tr> <td><table border="0">
+	<tr>
+		<td></td>
+	</tr>
+	<tr>
+		<td align="left">ESTIMADO CLIENTE: LE INFORMAMOS QUE  LAS CUENTAS DE EFECTIVO Y LAS TARJETAS DE D&#201;BITO QUE TENGAN  6 MESES O M&#193;S SIN ACTIVIDAD PODR&#205;AN SER CANCELADAS POR SU SEGURIDAD. ES UN GUSTO SERVIRLE</td>
+	</tr>
+	<tr>
+		<td align="left">Estimado cliente, le informamos que al momento de impresi&#243;n de este documento usted tiene los siguientes requisitos pendientes de actualizar&lt;br /&gt;CERTIFICACION DE COMPOSICION ACCIONARIA CON VISTA EN EL LIBRO DE ACCIONISTAS&lt;br /&gt;DOCUMENTOS DE REPRESENTANTE LEGAL&lt;br /&gt;DOCUMENTOS DE FIRMANTES&lt;br /&gt;DOCUMENTOS DE SOCIOS</td>
+	</tr>
+</table>
+</td></tr></table></div></div></body></html>
