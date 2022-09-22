@@ -20,11 +20,6 @@
     border-color: #cbd5e1;
     background-color: #f8fafc;
 }
-@media (prefers-color-scheme: dark) {
-    .labelFileUpload {
-        background-color: #333;
-    }
-}
 
 .labelFileUpload.dragActive {
     background-color: #ffffff;
