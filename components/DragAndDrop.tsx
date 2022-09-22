@@ -50,7 +50,7 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
   return (
     <form className={styles.formFileUpload} onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()} onClick={onButtonClick}>
       <input ref={inputRef} type="file" className={styles.inputFileUpload} multiple={true} onChange={handleChange} accept={acceptType} />
-      <label className={`${styles.labelFileUpload} ${dragActive ? "dragActive" : ""}`} htmlFor="inputFileUpload">
+      <label className={`${styles.labelFileUpload} ${dragActive ? styles.dragActive : ""}`} htmlFor="inputFileUpload">
         <div>
           <p>Drag and drop the {acceptType} file here, or click to browse.</p>
           {filename && (

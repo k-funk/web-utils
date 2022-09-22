@@ -21,8 +21,9 @@
     background-color: #f8fafc;
 }
 
-.labelFileUpload.dragActive {
-    background-color: #ffffff;
+.dragActive {
+    background-color: #dcf0ff;
+    border-color: #838992;
 }
 
 .uploadButton {
