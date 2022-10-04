@@ -16,13 +16,14 @@ import Alert from '../components/Alert'
 
 enum Modifications {
   dateFormat = 'dateFormat',
-  splitMonto = 'splitMonto',
 }
 
 const CommonCsvHeaders = [
   { label: 'Date', key: 'Fecha' },
   { label: 'Document', key: 'Documento' },
   { label: 'Description', key: 'Descripción' },
+  { label: 'Debit', key: 'Débitos' },
+  { label: 'Credit', key: 'Créditos' },
 ]
 
 const Home: NextPage = () => {
@@ -31,28 +32,42 @@ const Home: NextPage = () => {
   const [filename, setFilename] = useState('')
   const [modifications, setModifications] = useState<Modifications[]>([
     Modifications.dateFormat,
-    Modifications.splitMonto,
   ])
 
-  function preprocessHtml(fileStr: string) {
-    const tableId = 'data-table'
-    // add an ID to the table, to use as a selector
-    fileStr = fileStr.replace(
-      /(\<table)(\ style\=\"width:115%\;\ padding-top\:10px\;\"\>)/,
-      (match, g1, g2) => [g1, ` id="${tableId}"`, g2].join('')
-    )
+  /** This worked in 2022-08, but stopped working in 2022-09 */
+  // function preprocessHtml(fileStr: string) {
+  //   const tableId = 'data-table'
+  //   // add an ID to the table, to use as a selector
+  //   fileStr = fileStr.replace(
+  //     /(\<table)(\ style\=\"width:115%\;\ padding-top\:10px\;\"\>)/,
+  //     (match, g1, g2) => [g1, ` id="${tableId}"`, g2].join('')
+  //   )
+  //
+  //   const innerTable = cheerio.load(fileStr)(`#${tableId} table`)
+  //   // change the first row's <td>s into <th>s
+  //   // @ts-ignore
+  //   innerTable.find('tr').first().find('td').each((i: number, item: Element) => item.tagName = 'th')
+  //
+  //   // remove second row of table, since it's a statement summary
+  //   const secondRow = innerTable.find('tr:nth-child(2)')
+  //   if (!secondRow.text().includes('Saldo Inicial')) {
+  //     throw new Error('table format changed. Second row was not "Saldo Inicial"')
+  //   }
+  //   secondRow.remove()
+  //
+  //   return innerTable.toString()
+  // }
 
-    const innerTable = cheerio.load(fileStr)(`#${tableId} table`)
+  /** Working as of 2022-10 */
+  function preprocessHtml(fileStr: string) {
+    const $ = cheerio.load(fileStr)
+    const innerTable = $('td:contains("Fecha")')
+      .filter((_, td) => $(td).text() === 'Fecha') // there's more than <td> with "*Fecha*" in it
+      .parents('table').first()
+
     // change the first row's <td>s into <th>s
     // @ts-ignore
     innerTable.find('tr').first().find('td').each((i: number, item: Element) => item.tagName = 'th')
-
-    // remove second row of table, since it's a statement summary
-    const secondRow = innerTable.find('tr:nth-child(2)')
-    if (!secondRow.text().includes('Saldo Inicial')) {
-      throw new Error('table format changed. Second row was not "Saldo Inicial"')
-    }
-    secondRow.remove()
 
     return innerTable.toString()
   }
@@ -110,23 +125,8 @@ const Home: NextPage = () => {
         }))
     }
 
-    if (modifications.includes(Modifications.splitMonto)) {
-      csvDataOutput = csvDataOutput.map((rowObj: { [key: string]: string }) => ({
-          ...rowObj,
-          Credito: Math.sign(Number(rowObj.Monto)) === 1 ? `${rowObj.Monto}` : '',
-          Debito: Math.sign(Number(rowObj.Monto)) === -1 ? `${Math.abs(Number(rowObj.Monto))}` : '',
-        }))
-    }
-
     return csvDataOutput
   }, [csvData,  modifications])
-
-  const csvHeaders = [
-    ...CommonCsvHeaders,
-    modifications.includes(Modifications.splitMonto) ? undefined : { label: 'Amount', key: 'Monto' },
-    modifications.includes(Modifications.splitMonto) ? { label: 'Debit', key: 'Debito' } : undefined,
-    modifications.includes(Modifications.splitMonto) ? { label: 'Credit', key: 'Credito' } : undefined,
-  ].filter(isTruthy)
 
   const outputFilename = `promerica-converted-xls-${DateTime.now().toFormat('MM-dd-yyyy')}`
 
@@ -166,20 +166,11 @@ const Home: NextPage = () => {
                 />
                 <span>d/M/yyyy <span className="text-muted">-&gt;</span> MM/dd/yyyy</span>
               </label>
-              <label className={styles.checkboxLabel}>
-                <input
-                  type="checkbox"
-                  checked={modifications.includes(Modifications.splitMonto)}
-                  onChange={e => setModifications(xor(modifications, [Modifications.splitMonto]))}
-                  className={styles.checkboxMargin}
-                />
-                <span>{'Split "Monto"'} <span className="text-muted">-&gt;</span> {'"Credit" and "Debit"'}</span>
-              </label>
             </div>
             <div>
               <CSVLink
                 data={csvDataOutput}
-                headers={csvHeaders}
+                headers={CommonCsvHeaders}
                 className={styles.csvLink}
                 filename={outputFilename}
                 target="_blank"
