@@ -11,6 +11,7 @@ const HtmlTableToJson = require('html-table-to-json')
 import DragAndDrop from '../components/DragAndDrop'
 import styles from '../styles/Home.module.css'
 import { isTruthy } from '../utils/ts'
+import Alert from '../components/Alert'
 
 
 enum Modifications {
@@ -25,6 +26,7 @@ const CommonCsvHeaders = [
 ]
 
 const Home: NextPage = () => {
+  const [error, setError] = useState<string>()
   const [csvData, setCsvData] = useState<{ [key: string ]: string }[]>([])
   const [filename, setFilename] = useState('')
   const [modifications, setModifications] = useState<Modifications[]>([
@@ -56,29 +58,35 @@ const Home: NextPage = () => {
   }
 
   function handleReaderResult(fileStr: string) {
-    const jsonTables = HtmlTableToJson.parse(preprocessHtml(fileStr))
-    if (jsonTables.count !== 1) {
-      throw new Error('table format changed. Second row was not "Saldo Inicial"')
+    try {
+      const preproccedHtml = preprocessHtml(fileStr)
+      const jsonTables = HtmlTableToJson.parse(preproccedHtml)
+      if (jsonTables.count !== 1) {
+        throw new Error('html format changed. more than one table found')
+      }
+      setCsvData(jsonTables.results[0])
+
+      /** Tabletojson Implementation */
+      // const tableJson = Tabletojson.convert(innerTable.toString())[0]
+      // const [firstItem, ...dataArr] = tableJson
+      // if (!firstItem.Fecha.includes('Saldo Inicial')) {
+      //   throw new Error('table format changed. Second row was not "Saldo Inicial"')
+      // }
+      // setCsvOutput('fix')
+
+      /** tabletoCsv Implementation */
+      // const csvString = tableToCsv(innerTable.toString())
+      // const output = csvString.replace(/^\"(\d{1,2}\/\d{1,2}\/\d{4})\"/gm, (match:string, g1: string) => (
+      //   `"${DateTime.fromFormat(g1, 'd/M/yyyy').toFormat('MM/dd/yyyy')}"`
+      // ))
+      // setCsvOutput(output.split('\n'))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : JSON.stringify(err))
     }
-    setCsvData(jsonTables.results[0])
-
-    /** Tabletojson Implementation */
-    // const tableJson = Tabletojson.convert(innerTable.toString())[0]
-    // const [firstItem, ...dataArr] = tableJson
-    // if (!firstItem.Fecha.includes('Saldo Inicial')) {
-    //   throw new Error('table format changed. Second row was not "Saldo Inicial"')
-    // }
-    // setCsvOutput('fix')
-
-    /** tabletoCsv Implementation */
-    // const csvString = tableToCsv(innerTable.toString())
-    // const output = csvString.replace(/^\"(\d{1,2}\/\d{1,2}\/\d{4})\"/gm, (match:string, g1: string) => (
-    //   `"${DateTime.fromFormat(g1, 'd/M/yyyy').toFormat('MM/dd/yyyy')}"`
-    // ))
-    // setCsvOutput(output.split('\n'))
   }
 
   function handleChangeFiles(files: File[]) {
+    setError(undefined)
     if (files.length !== 1) throw new Error('more than one file was included')
     const file = files[0]
     setFilename(file.name)
@@ -144,6 +152,8 @@ const Home: NextPage = () => {
           acceptType=".xls"
           filename={filename}
         />
+        {error && <Alert>{error}</Alert>}
+
         {csvData.length > 0 && (
           <div className={styles.twoColumn}>
             <div>

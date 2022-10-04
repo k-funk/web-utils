@@ -1,0 +1,9 @@
+.alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    margin-bottom: 10px;
+    width: 100%;
+}
