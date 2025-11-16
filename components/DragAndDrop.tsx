@@ -22,7 +22,7 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
     } else if (e.type === "dragleave") {
       setDragActive(false);
     }
-  };
+  }
 
   // triggers when file is dropped
   function handleDrop(e: any) {
@@ -32,7 +32,7 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       onChangeFiles(e.dataTransfer.files);
     }
-  };
+  }
 
   // triggers when file is selected with click
   function handleChange(e: any) {
@@ -40,12 +40,12 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
     if (e.target.files && e.target.files[0]) {
       onChangeFiles(e.target.files);
     }
-  };
+  }
 
   // triggers the input when the button is clicked
   function onButtonClick() {
     inputRef.current?.click();
-  };
+  }
 
   return (
     <form className={styles.formFileUpload} onDragEnter={handleDrag} onSubmit={(e) => e.preventDefault()} onClick={onButtonClick}>
@@ -63,5 +63,5 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
       </label>
       {dragActive && <div className={styles.dragFileElement} onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}></div>}
     </form>
-  );
-};
+  )
+}

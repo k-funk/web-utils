@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { xor } from 'lodash'
 import { DateTime } from 'luxon'
 import { CSVLink } from 'react-csv'
@@ -10,7 +9,6 @@ const HtmlTableToJson = require('html-table-to-json')
 
 import DragAndDrop from '../components/DragAndDrop'
 import styles from '../styles/Home.module.css'
-import { isTruthy } from '../utils/ts'
 import Alert from '../components/Alert'
 
 
