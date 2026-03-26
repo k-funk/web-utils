@@ -148,7 +148,7 @@ const Home: NextPage = () => {
         <DragAndDrop
           onChangeFiles={handleChangeFiles}
           acceptType=".xls"
-          filename={filename}
+          filenames={filename ? [filename] : undefined}
         />
         {error && <Alert>{error}</Alert>}
 

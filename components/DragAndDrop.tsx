@@ -5,11 +5,11 @@ import styles from './DragAndDrop.module.css'
 interface Props {
   onChangeFiles: (files: File[]) => void,
   acceptType: string, // doesn't work for dropping
-  filename?: string,
+  filenames?: string[],
 }
 
 // copied from https://www.codemzy.com/blog/react-drag-drop-file-upload
-export default function DragDropFile({ onChangeFiles, acceptType, filename }: Props) {
+export default function DragDropFile({ onChangeFiles, acceptType, filenames }: Props) {
   const [dragActive, setDragActive] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -52,11 +52,13 @@ export default function DragDropFile({ onChangeFiles, acceptType, filename }: Pr
       <input ref={inputRef} type="file" className={styles.inputFileUpload} multiple={true} onChange={handleChange} accept={acceptType} />
       <label className={`${styles.labelFileUpload} ${dragActive ? styles.dragActive : ""}`} htmlFor="inputFileUpload">
         <div>
-          <p>Drag and drop the {acceptType} file here, or click to browse.</p>
-          {filename && (
+          <p>Drag and drop {acceptType} file(s) here, or click to browse.</p>
+          {filenames && filenames.length > 0 && (
             <>
-              <div className="text-uppercase text-muted"><small>filename</small></div>
-              <p><code>{filename}</code></p>
+              <div className="text-uppercase text-muted"><small>{filenames.length === 1 ? 'file' : `${filenames.length} files`}</small></div>
+              {filenames.map((name, i) => (
+                  <p key={`${i}-${name}`} className="no-margin"><small><code>{name}</code></small></p>
+              ))}
             </>
           )}
         </div>

@@ -1,0 +1,37 @@
+.card {
+  flex-shrink: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  background: #f7fafc;
+  text-align: center;
+  min-width: 140px;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sublabel {
+  font-size: 0.7rem;
+  color: #a0aec0;
+  margin-top: 0.2rem;
+}
+
+.value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: monospace;
+  color: #276749;
+  margin-top: 0.4rem;
+}
+
+.detail {
+  font-size: 0.8rem;
+  color: #718096;
+  margin-top: 0.3rem;
+}
